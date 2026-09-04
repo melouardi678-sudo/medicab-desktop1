@@ -1,0 +1,35 @@
+name: Build macOS DMG
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # يتيح تشغيل البناء يدوياً من واجهة غيت هاب
+
+jobs:
+  build-mac:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Electron App for macOS
+        run: npm run build:mac
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload DMG Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: macOS-DMG-Installer
+          path: dist/*.dmg
