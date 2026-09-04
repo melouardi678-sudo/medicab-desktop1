@@ -26,7 +26,7 @@
     "productName": "MediCab Medical Cabinet",
     "icon": "public/icon.png",
     "directories": {
-      "output": "release"
+      "output": "dist"
     },
     "files": [
       "dist/**/*",
