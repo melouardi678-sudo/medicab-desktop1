@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "tsx server.ts",
     "build": "vite build && esbuild server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs",
+    "build:mac": "npm run electron:build:mac",
     "electron:build": "npm run build && electron-builder --win --x64 --ia32",
     "electron:build:mac": "npm run build && electron-builder --mac dmg zip --arm64 --x64",
     "electron:build:mac:arm64": "npm run build && electron-builder --mac dmg --arm64",
